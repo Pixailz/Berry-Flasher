@@ -1,5 +1,14 @@
 # BerryFlasher
 
+## Installation
+
+```bash
+git clone --branch alpha https://github.com/pixailz/berry-flasher
+cd berry-flasher
+pip install -r requirements.txt
+python3 berry-flasher
+```
+
 ## TO REWRITE
 downloading from powershell :
 - change to library from python3
