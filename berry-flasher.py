@@ -96,7 +96,6 @@ class CrossUtils():
                     else:
                         elapsed_time = f"[00:{str(seconde).zfill(2)}:{ms}]"
 
-
                     pourcentage_download = int(200 * downloaded_byte / total_length)
                     downloaded_done = CrossUtils.convert_byte(downloaded_byte)
 
