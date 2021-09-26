@@ -6,7 +6,6 @@
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
 # HEADER
 
-import urllib.request
 import subprocess
 import requests
 import pathlib
@@ -168,7 +167,6 @@ class WinUtils():
         self.do_command("mkdir tmp")
 
         # downloading with python
-        print("Downloading file")
         CrossUtils.download(self.link, "./tmp/balena_tmp_win.zip", "balena-cli")
 
         # if update == True, delete ./bin/balena-cli-win folder
@@ -191,9 +189,9 @@ class WinUtils():
             if present, update, else download and installation"""
 
         # get tag of the latest release for balena-cli
-        url = "https://github.com/balena-io/balena-cli/releases/latest"
-        response = urllib.request.urlopen(url)
-        latest_link = response.geturl().split("/")
+        link = "https://github.com/balena-io/balena-cli/releases/latest"
+        response = requests.get(link)
+        latest_link = response.url.split("/")
         self.latest_tag = latest_link[len(latest_link)-1]
 
         # create download link
