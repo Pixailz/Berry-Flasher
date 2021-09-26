@@ -62,7 +62,7 @@ class WinUtils():
 
         self.path_to_ps = "C:\\WINDOWS\\system32\\WindowsPowerShell\\v1.0\\powershell.exe"
 
-    def do_command(self, command, print_out=False, get_out=True):
+    def do_command(self, command, print_out=False):
 
         """print_out : True  -> print output to user
                     False -> don't print output to user"""
