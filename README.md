@@ -14,9 +14,12 @@ nothing for the moment
 
 ## TO DO
 WinUtils.flash_disk()
-make menu for selecting image to flash
+- make menu for selecting image to flash
+  - download system image from link
 
-- download system image from link
+CrossUtils.Flash()
+- check if possible
+  - if not make WinUtils.Flash()
 
 #### PEP8 "linter"
 ```powershell
