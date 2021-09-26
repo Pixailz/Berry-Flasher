@@ -4,23 +4,6 @@
 # https://github.com/Pixailz
 
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
-
-"""
-TO REWRITE
-
-downloading from powershell
-    change to library from python3
-        the goal here is to improve speed download
-
-TODOo:
-WinUtils.flash_disk()
-make menu for selecting image to flash
-
-    download system image from link
-
-"""
-
-#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
 # HEADER
 
 import urllib.request
