@@ -8,8 +8,10 @@
 
 import urllib.request
 import subprocess
+import requests
 import pathlib
 import zipfile
+import time
 
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
 
@@ -40,18 +42,74 @@ class CrossUtils():
 
         """Byte converter"""
 
-        tmp_number = round(int(number) / 1_000_000_000)
+        tmp_number = round(int(number) / 1_000_000)
 
-        if tmp_number == 0:
-            converted = "0 o"
+        if tmp_number > 1000:
+            tmp_number = round(int(number) / 1_000_000_000)
+            converted = f"{tmp_number}Go"
 
-        elif tmp_number > 0:
-            converted = f"{tmp_number} Go"
         else:
-            tmp_number = round(int(number) / 1_000_000)
-            converted = f"{tmp_number} Mo"
+            converted = f"{tmp_number}Mo"
 
         return converted
+
+    @staticmethod
+    def download(link, file_path, title=False):
+
+        with open(file_path, "wb") as f:
+
+            #print(f"Downloading {file_path}")
+            response = requests.get(link, stream=True)
+            total_length = response.headers.get("content-length")
+
+            if total_length is None:
+                f.write(response.content)
+
+            else:
+                downloaded_byte = 0
+                total_length = int(total_length)
+                converted_length = CrossUtils.convert_byte(total_length)
+                begin_time = time.time()
+
+                for data in response.iter_content(chunk_size=4096):
+
+                    downloaded_byte += len(data)
+                    f.write(data)
+
+                    elapsed_time_brute = str(time.time() - begin_time).split(".")
+                    seconde = int(elapsed_time_brute[0])
+                    ms = elapsed_time_brute[1][:2]
+
+                    done = int(25 * downloaded_byte / total_length)
+                    pourcentage_done = int(100 * downloaded_byte / total_length)
+
+                    egal_str = "-" * done
+                    egal_str += ">"
+                    empy_str = " " * (25 - done)
+
+                    progress = f"[{egal_str}{empy_str}]"
+
+                    if seconde // 60 > 0:
+                        minute = seconde // 60
+                        seconde = seconde % 60
+                        elapsed_time = f"[{minute}:{str(seconde).zfill(2)}:{ms}"
+
+                    else:
+                        elapsed_time = f"[00:{str(seconde).zfill(2)}:{ms}]"
+
+
+                    pourcentage_download = int(200 * downloaded_byte / total_length)
+                    downloaded_done = CrossUtils.convert_byte(downloaded_byte)
+
+                    downloaded = f"({downloaded_done}/{converted_length}/{pourcentage_done}%)"
+
+                    if title:
+                        print(f"\r{progress} {title} {elapsed_time} {downloaded}", flush=True, end="")
+
+                    else:
+                        print(f"\r{progress} {elapsed_time} {downloaded}", flush=True, end="")
+
+                print(" done")
 
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
 
@@ -109,9 +167,9 @@ class WinUtils():
         print("creating tmp folder")
         self.do_command("mkdir tmp")
 
-        # donwloading with powershell
+        # downloading with python
         print("Downloading file")
-        self.do_command(f"Invoke-WebRequest -Uri '{self.link}' -OutFile './tmp/balena_tmp_win.zip'")
+        CrossUtils.download(self.link, "./tmp/balena_tmp_win.zip", "balena-cli")
 
         # if update == True, delete ./bin/balena-cli-win folder
         if update:
@@ -323,4 +381,5 @@ class BerryFlasher():
 
             print("===========================\n")
 
-BerryFlasher()
+if __name__ == "__main__":
+    BerryFlasher()
