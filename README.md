@@ -10,9 +10,7 @@ python3 berry-flasher
 ```
 
 ## TO REWRITE
-downloading from powershell :
-- change to library from python3
-- the goal here is to improve speed download
+nothing for the moment
 
 ## TO DO
 WinUtils.flash_disk()
