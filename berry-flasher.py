@@ -124,9 +124,7 @@ class WinUtils():
                     False -> don't print output to user"""
 
         if print_out:
-            out = subprocess.getoutput([self.path_to_ps, command])
-            print(out)
-            return out
+            subprocess.run([self.path_to_ps, command])
 
         else:
             out = subprocess.getoutput([self.path_to_ps, command])
