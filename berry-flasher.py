@@ -91,7 +91,7 @@ class CrossUtils():
                     if seconde // 60 > 0:
                         minute = seconde // 60
                         seconde = seconde % 60
-                        elapsed_time = f"[{minute}:{str(seconde).zfill(2)}:{ms}"
+                        elapsed_time = f"[{str(minute).zfill(2)}:{str(seconde).zfill(2)}:{ms}"
 
                     else:
                         elapsed_time = f"[00:{str(seconde).zfill(2)}:{ms}]"
