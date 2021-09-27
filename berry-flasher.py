@@ -137,7 +137,7 @@ class WinUtils():
         """get current installed version tag and check if it's up to date"""
 
         # get current version tag
-        current_tag = self.do_command("./bin/balena-cli-win/balena.exe version")
+        current_tag = self.do_command("./bin/balena_cli_win/balena.exe version")
 
         # if current tag match latest
         if current_tag == self.latest_tag.strip("v"):
@@ -166,18 +166,18 @@ class WinUtils():
         self.do_command("mkdir tmp")
 
         # downloading with python
-        CrossUtils.download(self.link, "./tmp/balena_tmp_win.zip", "balena-cli")
+        CrossUtils.download(self.link, "./tmp/balena_cli_tmp.zip", "balena-cli")
 
-        # if update == True, delete ./bin/balena-cli-win folder
+        # if update == True, delete ./bin/balena_cli_win folder
         if update:
-            self.do_command("rm -r ./bin/balena-cli-win")
+            self.do_command("rm -r ./bin/balena_cli_win")
 
         # unzip downloaded file in bin
-        with zipfile.ZipFile("./tmp/balena_tmp_win.zip", "r") as zip_ref:
+        with zipfile.ZipFile("./tmp/balena_cli_tmp.zip", "r") as zip_ref:
             zip_ref.extractall("./bin")
 
         # rename installation folder
-        self.do_command("mv ./bin/balena-cli ./bin/balena-cli-win")
+        self.do_command("mv ./bin/balena-cli ./bin/balena_cli_win")
 
         # delete tmp
         self.do_command("rm -r tmp")
@@ -199,7 +199,7 @@ class WinUtils():
         self.link = link_base + link_version
 
         # check if installation folder is present
-        instalation_folder = pathlib.Path("./bin/balena-cli-win")
+        instalation_folder = pathlib.Path("./bin/balena_cli_win")
         if instalation_folder.exists():
             print("installation folder for windows found")
             self.balena_check_update()
