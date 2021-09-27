@@ -352,11 +352,28 @@ class BerryFlasher():
             exit()
 
         self.list_disk = utils.list_disk()
-
         self.print_disk()
 
-        # choice with the given list below
-        selected_disk = input("select a disk from above : ")
+        entry_checked = False
+        while not entry_checked:
+
+            # choice with the given list below
+            entry = input("select a disk from above : ")
+
+            # refresh disk
+            if entry.lower() == "r":
+                self.list_disk = utils.list_disk()
+                self.print_disk()
+                continue
+
+            # a lil' bit of sanitarization
+            for i in range(len(self.list_disk)):
+                if self.list_disk[i]["path"] == entry:
+                    entry_checked = True
+
+            # error message for incorect input
+            if not entry_checked:
+                print("retry.")
 
         utils.flash_disk()
 
