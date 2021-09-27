@@ -106,8 +106,8 @@ class CrossUtils():
 
                     downloaded = f"({downloaded_done}/{converted_length}/{pourcentage_done}%)"
 
-                    if title:
-                        print(f"\r{progress} {title} {elapsed_time} {downloaded}", flush=True, end="")
+                    number_of_dot = (seconde % 3) + 1
+                    download_dot = "Download" + "." * number_of_dot
 
                     print(f"\r{download_dot} {progress} {title} {elapsed_time} {downloaded}", flush=True, end="")
 
