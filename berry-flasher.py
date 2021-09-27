@@ -55,6 +55,11 @@ class CrossUtils():
     @staticmethod
     def download(link, file_path, title=False):
 
+        """
+        based on this:
+        https://stackoverflow.com/a/21868231/7261056
+        """
+
         with open(file_path, "wb") as f:
 
             #print(f"Downloading {file_path}")
