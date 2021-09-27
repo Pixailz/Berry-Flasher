@@ -53,7 +53,7 @@ class CrossUtils():
         return converted
 
     @staticmethod
-    def download(link, file_path, title=False):
+    def download(link, file_path, title=""):
 
         """
         based on this:
@@ -109,8 +109,7 @@ class CrossUtils():
                     if title:
                         print(f"\r{progress} {title} {elapsed_time} {downloaded}", flush=True, end="")
 
-                    else:
-                        print(f"\r{progress} {elapsed_time} {downloaded}", flush=True, end="")
+                    print(f"\r{download_dot} {progress} {title} {elapsed_time} {downloaded}", flush=True, end="")
 
                 print(" done")
 
