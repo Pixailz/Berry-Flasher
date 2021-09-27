@@ -21,6 +21,14 @@ CrossUtils.Flash()
 - check if possible
   - if not make WinUtils.Flash()
 
+UI
+- CrossUtils.download
+  - add eta
+
+- listing of disk
+  - how disk info are displayed
+  - clear disk output etc ...
+
 #### PEP8 "linter"
 ```powershell
 pycodestyle.exe --ignore="E501,E302,E305,E226,E265" <file_name>
