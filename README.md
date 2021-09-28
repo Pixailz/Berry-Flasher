@@ -17,14 +17,6 @@ WinUtils.flash_disk()
 - make menu for selecting image to flash
   - download system image from link
 
-BerryFlasher.print_disk()
-- how disk info are displayed, in one line form:
-  - entry choice number (assigned with disk id)
-  - disk id
-  - disk name
-  - total space
-- clear disk output when refresh etc ...
-
 #### PEP8 "linter"
 ```powershell
 pycodestyle.exe --ignore="E501,E302,E305,E226,E265" <file_name>
