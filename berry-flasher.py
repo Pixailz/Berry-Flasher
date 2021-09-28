@@ -304,11 +304,11 @@ class WinUtils():
                         tmp_name = "".join(tmp_line[2].split())
 
                         # format data in dictionary
-                        disk_info = {
-                            "path": tmp_line[1],
-                            "space": tmp_space,
-                            "name": tmp_name
-                        }
+                        disk_info = [
+                            tmp_line[1],
+                            tmp_space,
+                            tmp_name
+                        ]
 
                         # add dictionary to the big disk list
                         self.disk.append(disk_info)
@@ -407,10 +407,7 @@ class BerryFlasher():
                 self.print_disk()
                 continue
 
-            # a lil' bit of sanitarization
-            for i in range(len(self.list_disk)):
-                if self.list_disk[i]["path"] == entry:
-                    entry_checked = True
+
 
             # error message for incorect input
             if not entry_checked:
@@ -426,13 +423,14 @@ class BerryFlasher():
             print("No elegible disk found, exiting ...")
             exit()
 
-        for i in range(len(self.list_disk)):
-            print("===========================")
+        else:
+            for i in range(len(self.list_disk)):
 
-            for k, v in self.list_disk[i].items():
-                print(f"{k} : {v}")
+                disk_id = self.list_disk[i][0]
+                disk_name = self.list_disk[i][2]
+                disk_space = self.list_disk[i][1]
 
-            print("===========================\n")
+                print(f"{i+1}. id: {disk_id} | {disk_name} ({disk_space})")
 
 if __name__ == "__main__":
     BerryFlasher()
