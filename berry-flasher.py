@@ -407,13 +407,19 @@ class BerryFlasher():
                 self.print_disk()
                 continue
 
+            entry = int(entry)
 
+            try:
+                self.entry_choice[entry]
 
-            # error message for incorect input
-            if not entry_checked:
-                print("retry.")
+            except KeyError:
+                print("wrong choice")
 
-        utils.flash_disk()
+            else:
+                entry_checked = True
+
+        file_to_patch = ""
+        utils.flash_disk(file_to_patch, self.entry_choice[entry])
 
     def print_disk(self):
 
@@ -424,9 +430,12 @@ class BerryFlasher():
             exit()
 
         else:
+            self.entry_choice = {}
             for i in range(len(self.list_disk)):
 
                 disk_id = self.list_disk[i][0]
+                self.entry_choice[i+1] = disk_id
+
                 disk_name = self.list_disk[i][2]
                 disk_space = self.list_disk[i][1]
 
