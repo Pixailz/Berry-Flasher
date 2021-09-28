@@ -25,9 +25,13 @@ UI
 - CrossUtils.download
   - add eta
 
-- listing of disk
-  - how disk info are displayed
-  - clear disk output etc ...
+BerryFlasher.print_disk()
+- how disk info are displayed, in one line form:
+  - entry choice number (assigned with disk id)
+  - disk id
+  - disk name
+  - total space
+- clear disk output when refresh etc ...
 
 #### PEP8 "linter"
 ```powershell
