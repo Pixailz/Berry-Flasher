@@ -62,56 +62,70 @@ class CrossUtils():
 
         with open(file_path, "wb") as f:
 
-            #print(f"Downloading {file_path}")
+            # download of file
             response = requests.get(link, stream=True)
+            # get length of ile in header
             total_length = response.headers.get("content-length")
 
+            # if total length is not present in header
             if total_length is None:
+                # write without progress bar :'(
                 f.write(response.content)
 
             else:
-                downloaded_byte = 0
+                # cast in int of str
                 total_length = int(total_length)
+                # convert in human readable
                 converted_length = CrossUtils.convert_byte(total_length)
+
+                # epoch begin time
                 begin_time = time.time()
+
+                # need to be decalred out of the loop
+                downloaded_byte = 0
 
                 for data in response.iter_content(chunk_size=4096):
 
+                    # add lenght of data in downloaded _byte
                     downloaded_byte += len(data)
+                    # write data
                     f.write(data)
 
+                    # get a list of second(0) and millisecond(1)
                     elapsed_time_brute = str(time.time() - begin_time).split(".")
+
                     seconde = int(elapsed_time_brute[0])
+                    # cut for 2 digits
                     ms = elapsed_time_brute[1][:2]
 
+                    # cross product for a length of 25
                     done = int(25 * downloaded_byte / total_length)
+                    # cross product for pourcentage
                     pourcentage_done = int(100 * downloaded_byte / total_length)
-
-                    egal_str = "-" * done
-                    egal_str += ">"
-                    empy_str = " " * (25 - done)
-
-                    progress = f"[{egal_str}{empy_str}]"
-
-                    if seconde // 60 > 0:
-                        minute = seconde // 60
-                        seconde = seconde % 60
-                        elapsed_time = f"[{str(minute).zfill(2)}:{str(seconde).zfill(2)}:{ms}"
-
-                    else:
-                        elapsed_time = f"[00:{str(seconde).zfill(2)}:{ms}]"
-
-                    pourcentage_download = int(200 * downloaded_byte / total_length)
-                    downloaded_done = CrossUtils.convert_byte(downloaded_byte)
-
-                    downloaded = f"({downloaded_done}/{converted_length}/{pourcentage_done}%)"
 
                     number_of_dot = (seconde % 3) + 1
                     dot = "." * number_of_dot
                     space = " " * (3 - number_of_dot)
-                    download_dot = "Download" + dot + space
+                    str_dot = "Download" + dot + space
 
-                    print(f"\r{download_dot} {progress} {title} {elapsed_time} {downloaded}", flush=True, end="")
+                    # done str
+                    egal_str = "-" * done
+                    # head str
+                    egal_str += ">"
+                    # empty str
+                    empy_str = " " * (25 - done)
+                    str_progress = f"[{egal_str}{empy_str}]"
+
+                    # elapsed time
+                    minute = seconde // 60
+                    seconde = seconde % 60
+                    str_elapsed = f"[{str(minute).zfill(2)}:{str(seconde).zfill(2)}:{ms}]"
+
+
+                    downloaded_done = CrossUtils.convert_byte(downloaded_byte)
+                    str_downloaded = f"({downloaded_done}/{converted_length}/{pourcentage_done}%)"
+
+                    print(f"\r{str_dot} {str_progress} {title} {str_elapsed} {str_downloaded}", flush=True, end="")
 
                 print(" done")
 
