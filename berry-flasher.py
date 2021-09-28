@@ -83,6 +83,7 @@ class CrossUtils():
 
                 # need to be decalred out of the loop
                 downloaded_byte = 0
+                str_speed = ""
 
                 for data in response.iter_content(chunk_size=4096):
 
@@ -121,11 +122,18 @@ class CrossUtils():
                     seconde = seconde % 60
                     str_elapsed = f"[{str(minute).zfill(2)}:{str(seconde).zfill(2)}:{ms}]"
 
+                    # little time wait to connection to begin
+                    if seconde > 0:
+                        # refresh per second
+                        if elapsed_time_brute[1][:1] == "0":
+                            # speed convertion
+                            download_speed = CrossUtils.convert_byte(downloaded_byte / seconde)
+                            str_speed = f"{download_speed}/s"
 
                     downloaded_done = CrossUtils.convert_byte(downloaded_byte)
                     str_downloaded = f"({downloaded_done}/{converted_length}/{pourcentage_done}%)"
 
-                    print(f"\r{str_dot} {str_progress} {title} {str_elapsed} {str_downloaded}", flush=True, end="")
+                    print(f"\r{str_dot}{str_progress} {title} {str_elapsed} {str_speed} {str_downloaded}", flush=True, end="")
 
                 print(" done")
 
