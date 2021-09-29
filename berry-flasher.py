@@ -336,10 +336,12 @@ class WinUtils():
     def flash_disk(self, file_to_patch, disk_id):
 
         #\\.\PhysicalDrive<id> with id given by list_disk()
-        command = ("./bin/balena_cli_win/balena "
-                  f"local flash {file_to_patch} "
-                  f"--drive \"\\\\.\PhysicalDrive{disk_id}\" "
-                   "--yes")
+        command = (
+            "./bin/balena_cli_win/balena "
+            f"local flash {file_to_patch} "
+            f"--drive \"\\\\.\PhysicalDrive{disk_id}\" "
+            "--yes"
+        )
 
         try:
             subprocess.run([self.path_to_ps, command])
