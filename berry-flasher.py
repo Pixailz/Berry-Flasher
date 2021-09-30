@@ -355,14 +355,60 @@ class WinUtils():
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
 
 class LinUtils():
+    def do_command(self, command):
+
+        out = subprocess.getoutput(f"/bin/bash -c '{command}'")
+        return out
+
     def check_root(self):
 
         """check if script is launched with elevated privileges"""
 
-        pass
+        is_root = self.do_command("echo $UID")
 
-    def list_disk():
-        pass
+        if is_root == "0":
+            return True
+
+        else:
+            return False
+
+    def parse_info_disk(self):
+
+        line_disk = self.disk_brut.split("\n")
+
+        for line in line_disk:
+            tmp_line = line.split(maxsplit=3)
+
+            if tmp_line[0] != "usb":
+                continue
+
+            if tmp_line[2] == "0":
+                continue
+
+            tmp_transport_type = tmp_line[0]
+            tmp_path = tmp_line[1]
+            tmp_space = CrossUtils.convert_byte(tmp_line[2])
+            tmp_name = tmp_line[3].replace(" ", "")
+
+            disk_info = [
+                tmp_path,
+                tmp_space,
+                tmp_name
+            ]
+
+            self.disk.append(disk_info)
+
+    def list_disk(self):
+        self.disk = []
+
+        command = "lsblk --nodeps --noheadings --bytes --output tran,path,size,vendor,model"
+        command += " --list"
+
+        self.disk_brut = subprocess.getoutput(command)
+
+        self.parse_info_disk()
+
+        return self.disk
 
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
 
