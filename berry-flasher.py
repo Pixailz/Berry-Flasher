@@ -339,7 +339,8 @@ class WinUtils():
         command = (
             "./bin/balena_cli_win/balena "
             f"local flash {file_to_patch} "
-            f"--drive \"\\\\.\\PhysicalDrive{disk_id}\" "
+            "--drive '\\\\.\\"
+            f"PhysicalDrive{disk_id}' "
             "--yes"
         )
 
