@@ -243,7 +243,7 @@ class WinUtils():
 
         is_elevate = self.do_command(command)
 
-        # here the output of subprocess return an string and not an booleen, so convertion :)
+        # here the output of subprocess return a string and not a booleen, so convertion :)
         if is_elevate == "True":
             is_elevate = True
 
