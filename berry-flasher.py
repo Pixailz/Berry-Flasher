@@ -22,7 +22,7 @@ class CrossUtils():
         """os.name like function with subprocess"""
 
         try:
-            subprocess.run("/bin/ls")
+            subprocess.getoutput("/bin/ls")
         except FileNotFoundError:
             return "nt"
         else:
