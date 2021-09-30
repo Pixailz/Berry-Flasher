@@ -15,6 +15,7 @@ CrossUtils.convert_byte
 
 CrossUtils.download()
 1. reduce refresh time
+
     OR
 2. change condition  `elapsed_time_brute[1][:1] == "0"`
 
