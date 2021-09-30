@@ -10,12 +10,23 @@ python3 berry-flasher
 ```
 
 ## TO REWRITE
-nothing for the moment
+CrossUtils.convert_byte
+- handle float number
+
+CrossUtils.download()
+1. reduce refresh time
+    OR
+2. change condition  `elapsed_time_brute[1][:1] == "0"`
+
+LinUtils.do_command()
 
 ## TO DO
 WinUtils.flash_disk()
 - make menu for selecting image to flash
   - download system image from link
+
+LinUtils.balena_cli()
+LinUtils.flash_disk()
 
 #### PEP8 "linter"
 ```powershell
