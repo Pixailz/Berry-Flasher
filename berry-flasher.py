@@ -510,7 +510,6 @@ class LinUtils():
             # good flashing average since long time using gui version ;)
             pass
 
-
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
 
 class BerryFlasher():
