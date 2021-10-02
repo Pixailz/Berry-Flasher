@@ -227,7 +227,7 @@ class WinUtils():
         # check if installation folder is present
         instalation_folder = pathlib.Path("./bin/balena_cli_win")
         if instalation_folder.exists():
-            print("installation folder for windows found")
+            print("installation folder for Windows found")
             self.balena_check_update()
 
         else:
@@ -355,10 +355,92 @@ class WinUtils():
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
 
 class LinUtils():
-    def do_command(self, command):
+    def do_command(self, command, print_out=False):
 
-        out = subprocess.getoutput(f"/bin/bash -c '{command}'")
-        return out
+        if not print_out:
+            out = subprocess.getoutput(["/bin/bash", "-c", command])
+            return out
+
+        else:
+            subprocess.run(["/bin/bash", "-c", command])
+
+    def balena_check_update(self):
+
+        """get current installed version tag and check if it's up to date"""
+
+        # get current version tag
+        current_tag = self.do_command("./bin/balena_cli_lin/balena version")
+
+        # if current tag match latest
+        if current_tag == self.latest_tag.strip("v"):
+            print("balena-cli latest update")
+
+        # else run balena_install() but with update=True
+        else:
+            print("NEED TO UPGRADE")
+            self.balena_install(update=True)
+
+    def balena_install(self, update=False):
+
+        """Download and installation of the latest release of
+        balena-cli-standalone"""
+
+        # check if tmp is present
+        path_to_tmp = pathlib.Path("./tmp")
+
+        # if True, delete it
+        if path_to_tmp.exists():
+            print("removing tmp folder")
+            self.do_command("rm -r tmp")
+
+        # creation of tmp folder
+        print("creating tmp folder")
+        self.do_command("mkdir tmp")
+
+        # downloading with python
+        CrossUtils.download(self.link, "./tmp/balena_cli_tmp.zip", "balena-cli")
+
+        # if update == True, delete ./bin/balena_cli_win folder
+        if update:
+            self.do_command("rm -r ./bin/balena_cli_lin")
+
+        # unzip downloaded file in bin
+        with zipfile.ZipFile("./tmp/balena_cli_tmp.zip", "r") as zip_ref:
+            zip_ref.extractall("./bin")
+
+        # rename installation folder
+        self.do_command("mv ./bin/balena-cli ./bin/balena_cli_lin")
+
+        # give right permission
+        self.do_command("chmod +x ./bin/balena_cli_lin/balena")
+
+        # delete tmp
+        self.do_command("rm -r tmp")
+
+    def balena_cli(self):
+
+        """Checking of necessary file
+            if present, update, else download and installation"""
+
+        # get tag of the latest release for balena-cli
+        link = "https://github.com/balena-io/balena-cli/releases/latest"
+        response = requests.get(link)
+        latest_link = response.url.split("/")
+        self.latest_tag = latest_link[len(latest_link)-1]
+
+        # create download link
+        link_base = "https://github.com/balena-io/balena-cli/releases/download/"
+        link_version = f"{self.latest_tag}/balena-cli-{self.latest_tag}-linux-x64-standalone.zip"
+        self.link = link_base + link_version
+
+        # check if installation folder is present
+        instalation_folder = pathlib.Path("./bin/balena_cli_lin")
+        if instalation_folder.exists():
+            print("installation folder for Linux found")
+            self.balena_check_update()
+
+        else:
+            self.balena_install()
 
     def check_root(self):
 
