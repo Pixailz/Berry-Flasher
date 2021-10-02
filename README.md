@@ -26,9 +26,6 @@ WinUtils.flash_disk()
 - make menu for selecting image to flash
   - download system image from link
 
-LinUtils.balena_cli()
-LinUtils.flash_disk()
-
 #### PEP8 "linter"
 ```powershell
 pycodestyle.exe --ignore="E501,E302,E305,E226,E265" <file_name>
