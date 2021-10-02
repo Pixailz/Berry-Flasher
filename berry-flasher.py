@@ -492,6 +492,25 @@ class LinUtils():
 
         return self.disk
 
+    def flash_disk(self, file_to_patch, disk_id):
+
+        command = (
+            "./bin/balena_cli_lin/balena "
+            f"local flash {file_to_patch} "
+            f"--drive {disk_id} "
+            "--yes"
+        )
+
+        try:
+            #self.do_command(command, print_out=True)
+            subprocess.run(["/bin/bash", "-c", command])
+
+        except KeyboardInterrupt:
+            # for interrupting balena validating process at the end
+            # good flashing average since long time using gui version ;)
+            pass
+
+
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
 
 class BerryFlasher():
