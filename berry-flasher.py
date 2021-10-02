@@ -358,7 +358,7 @@ class LinUtils():
     def do_command(self, command, print_out=False):
 
         if not print_out:
-            out = subprocess.getoutput(["/bin/bash", "-c", command])
+            out = subprocess.getoutput(f"/bin/bash -c '{command}'")
             return out
 
         else:
