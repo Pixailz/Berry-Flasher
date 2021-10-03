@@ -551,7 +551,7 @@ class BerryFlasher():
         # declaration of cross-platform utility
         self.cross_utils = CrossUtils()
 
-        if cross_utils.get_os() == "nt":
+        if self.cross_utils.get_os() == "nt":
             self.utils = WinUtils()
 
         else:
@@ -566,6 +566,44 @@ class BerryFlasher():
             exit()
 
         self.menu()
+
+    def menu_print_title(self, title):
+        bf_version = f"BF {version}"
+        bf_version_length = len(bf_version)
+        self.center_title = self.utils.return_terminal_width()
+
+        title = title.center(self.center_title - (bf_version_length * 2))
+        print(bf_version+ title)
+
+    def menu_print(self):
+
+        self.menu_print_title("MAIN MENU")
+
+        for i in range(len(self.menu_options)):
+            print(f"{i+1}. {self.menu_options[i]}".center(self.center_title))
+
+    def menu(self):
+        self.menu_options = [
+            "Flash Disk",
+            "Quit"
+        ]
+
+        entry_checked = False
+
+        while not entry_checked:
+            self.utils.clear_screen()
+            self.menu_print()
+            entry = input(": ")
+
+            for i in range(len(self.menu_options)):
+                j = i + 1
+                # si Q
+                if j == int(entry):
+                    entry_checked = True
+
+            if not entry_checked:
+                print("wrong choice")
+                time.sleep(2)
 
     def select_disk(self):
 
