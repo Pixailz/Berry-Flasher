@@ -373,6 +373,8 @@ class WinUtils():
             # good flashing average since long time using gui version ;)
             pass
 
+    def clear_screen(self):
+        self.do_command("cls")
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
 
 class LinUtils():
@@ -531,6 +533,8 @@ class LinUtils():
             # good flashing average since long time using gui version ;)
             pass
 
+    def clear_screen():
+        self.do_command("clear")
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
 
 class BerryFlasher():
