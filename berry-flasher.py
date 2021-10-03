@@ -552,10 +552,10 @@ class BerryFlasher():
             self.utils = LinUtils()
 
         # check if balena-cli is correctly installed
-        utils.balena_cli()
+        self.utils.balena_cli()
 
         # if privileges are not elevated
-        if not utils.check_root():
+        if not self.utils.check_root():
             print("launch script with elevated privileges")
             exit()
 
