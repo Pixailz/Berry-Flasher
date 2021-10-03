@@ -144,14 +144,12 @@ class CrossUtils():
                     seconde = seconde % 60
                     str_elapsed = f"[{str(minute).zfill(2)}:{str(seconde).zfill(2)}:{ms}]"
 
-                    # little time wait to connection to begin
-                    if seconde > 0:
-                        # refresh per second
-                        if seconde > tmp_seconde:
-                            tmp_seconde = seconde
-                            # speed convertion
-                            download_speed = CrossUtils.convert_byte(downloaded_byte / seconde)
-                            str_speed = f"{download_speed}/s"
+                    # refresh per second
+                    if seconde > tmp_seconde:
+                        tmp_seconde = seconde
+                        # speed convertion
+                        download_speed = CrossUtils.convert_byte(downloaded_byte / seconde)
+                        str_speed = f"{download_speed}/s"
 
                     downloaded_done = CrossUtils.convert_byte(downloaded_byte, rounded=True)
                     str_downloaded = f"({downloaded_done}/{converted_length}/{pourcentage_done}%)"
