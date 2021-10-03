@@ -375,6 +375,9 @@ class WinUtils():
 
     def clear_screen(self):
         self.do_command("cls")
+
+    def return_terminal_width(self):
+        return int(self.do_command("$Host.UI.RawUI.WindowSize.Width"))
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
 
 class LinUtils():
@@ -533,8 +536,11 @@ class LinUtils():
             # good flashing average since long time using gui version ;)
             pass
 
-    def clear_screen():
+    def clear_screen(self):
         self.do_command("clear")
+
+    def return_terminal_width(self):
+        pass
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
 
 class BerryFlasher():
