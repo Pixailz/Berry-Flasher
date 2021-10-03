@@ -41,14 +41,21 @@ class CrossUtils():
 
         """Byte converter"""
 
-        tmp_number = round(int(number) / 1_000_000)
-
-        if tmp_number > 1000:
-            tmp_number = round(int(number) / 1_000_000_000)
+        if number > 1_000_000_000:
+            tmp_number = round(int(number) / 1_000_000_000, 2)
             converted = f"{tmp_number}Go"
 
-        else:
+        elif number > 1_000_000:
+            tmp_number = round(int(number) / 1_000_000, 2)
             converted = f"{tmp_number}Mo"
+
+        elif number > 1_000:
+            tmp_number = round(int(number) / 1_000, 2)
+            converted = f"{tmp_number}Ko"
+
+        else:
+            tmp_number = int(number)
+            converted = f"{tmp_number}b"
 
         return converted
 
