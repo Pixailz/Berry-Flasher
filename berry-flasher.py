@@ -102,9 +102,10 @@ class CrossUtils():
                 # epoch begin time
                 begin_time = time.time()
 
-                # need to be decalred out of the loop
+                # need to be declared out of the loop
                 downloaded_byte = 0
                 str_speed = ""
+                tmp_seconde = 0
 
                 for data in response.iter_content(chunk_size=4096):
 
@@ -146,7 +147,8 @@ class CrossUtils():
                     # little time wait to connection to begin
                     if seconde > 0:
                         # refresh per second
-                        if elapsed_time_brute[1][:1] == "0":
+                        if seconde > tmp_seconde:
+                            tmp_seconde = seconde
                             # speed convertion
                             download_speed = CrossUtils.convert_byte(downloaded_byte / seconde)
                             str_speed = f"{download_speed}/s"
