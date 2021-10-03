@@ -10,17 +10,12 @@ python3 berry-flasher
 ```
 
 ## TO REWRITE
-CrossUtils.download()
-- refresh don't work all the time (must be fix)
-  1. reduce refresh time
 
-      OR
-  2. change condition  `elapsed_time_brute[1][:1] == "0"`
-
-LinUtils.do_command()
+Nothing
 
 ## TO DO
-WinUtils.flash_disk()
+berry-flasher.menu()
+
 - make menu for selecting image to flash
   - download system image from link
 
