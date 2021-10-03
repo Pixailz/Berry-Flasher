@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 #coding:utf-8
-# version : alpha_0.0.3
+version = "alpha 0.0.4"
 # https://github.com/Pixailz
 
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
