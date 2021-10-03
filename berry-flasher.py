@@ -37,25 +37,39 @@ class CrossUtils():
         return any([char.isalnum() for char in txt])
 
     @staticmethod
-    def convert_byte(number):
+    def convert_byte(number, rounded=False):
 
         """Byte converter"""
 
-        if number > 1_000_000_000:
-            tmp_number = round(int(number) / 1_000_000_000, 2)
-            converted = f"{tmp_number}Go"
+        number = int(number)
+
+        if number > 1_000_000_000_000:
+            divider = 1_000_000_000_000
+            measure_unit = "To"
+
+        elif number > 1_000_000_000:
+            divider = 1_000_000_000
+            measure_unit = "Go"
 
         elif number > 1_000_000:
-            tmp_number = round(int(number) / 1_000_000, 2)
-            converted = f"{tmp_number}Mo"
+            divider = 1_000_000
+            measure_unit = f"Mo"
 
         elif number > 1_000:
-            tmp_number = round(int(number) / 1_000, 2)
-            converted = f"{tmp_number}Ko"
+            divider = 1_000
+            measure_unit = f"Ko"
 
         else:
-            tmp_number = int(number)
-            converted = f"{tmp_number}b"
+            divider = 1
+            measure_unit = f"b"
+
+        if rounded:
+            tmp_number = int(round(number / divider))
+            converted = f"{tmp_number}{measure_unit}"
+
+        else:
+            tmp_number = round(number / divider, 2)
+            converted = f"{tmp_number}{measure_unit}"
 
         return converted
 
@@ -83,7 +97,7 @@ class CrossUtils():
                 # cast in int of str
                 total_length = int(total_length)
                 # convert in human readable
-                converted_length = CrossUtils.convert_byte(total_length)
+                converted_length = CrossUtils.convert_byte(total_length, rounded=True)
 
                 # epoch begin time
                 begin_time = time.time()
@@ -137,7 +151,7 @@ class CrossUtils():
                             download_speed = CrossUtils.convert_byte(downloaded_byte / seconde)
                             str_speed = f"{download_speed}/s"
 
-                    downloaded_done = CrossUtils.convert_byte(downloaded_byte)
+                    downloaded_done = CrossUtils.convert_byte(downloaded_byte, rounded=True)
                     str_downloaded = f"({downloaded_done}/{converted_length}/{pourcentage_done}%)"
 
                     print(f"\r{str_dot}{str_progress} {title} {str_elapsed} {str_speed} {str_downloaded}", flush=True, end="")
