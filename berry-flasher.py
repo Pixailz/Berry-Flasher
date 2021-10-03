@@ -538,21 +538,14 @@ class BerryFlasher():
     """main loop (cf. deathloop)"""
 
     def __init__(self):
-        self.main()
-
-    def main(self):
-
         # declaration of cross-platform utility
-        cross_utils = CrossUtils()
-
-        """here the tips it's that all the principal function in WinUtils or LinUtils
-        have the same name"""
+        self.cross_utils = CrossUtils()
 
         if cross_utils.get_os() == "nt":
-            utils = WinUtils()
+            self.utils = WinUtils()
 
         else:
-            utils = LinUtils()
+            self.utils = LinUtils()
 
         # check if balena-cli is correctly installed
         utils.balena_cli()
@@ -561,6 +554,10 @@ class BerryFlasher():
         if not utils.check_root():
             print("launch script with elevated privileges")
             exit()
+
+        self.menu()
+
+    def select_disk(self):
 
         self.list_disk = utils.list_disk()
         self.print_disk()
@@ -588,7 +585,7 @@ class BerryFlasher():
             else:
                 entry_checked = True
 
-        file_to_patch = ""
+
         utils.flash_disk(file_to_patch, self.entry_choice[entry])
 
     def print_disk(self):
