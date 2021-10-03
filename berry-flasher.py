@@ -563,7 +563,7 @@ class BerryFlasher():
 
     def select_disk(self):
 
-        self.list_disk = utils.list_disk()
+        self.list_disk = self.utils.list_disk()
         self.print_disk()
 
         entry_checked = False
@@ -574,7 +574,7 @@ class BerryFlasher():
 
             # refresh disk
             if entry.lower() == "r":
-                self.list_disk = utils.list_disk()
+                self.list_disk = self.utils.list_disk()
                 self.print_disk()
                 continue
 
@@ -590,7 +590,7 @@ class BerryFlasher():
                 entry_checked = True
 
 
-        utils.flash_disk(file_to_patch, self.entry_choice[entry])
+        self.utils.flash_disk(file_to_patch, self.entry_choice[entry])
 
     def print_disk(self):
 
