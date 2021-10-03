@@ -10,16 +10,12 @@ python3 berry-flasher
 ```
 
 ## TO REWRITE
-CrossUtils.convert_byte
-- handle float number
-
 CrossUtils.download()
 - refresh don't work all the time (must be fix)
   1. reduce refresh time
 
       OR
   2. change condition  `elapsed_time_brute[1][:1] == "0"`
-- rewrite convert_byte, more accurate speed
 
 LinUtils.do_command()
 
