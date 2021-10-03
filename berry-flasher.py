@@ -44,31 +44,31 @@ class CrossUtils():
         number = int(number)
 
         if number > 1_000_000_000_000:
-            divider = 1_000_000_000_000
-            measure_unit = "To"
+            multiplier = 8 / (8 * 1024 * 1024 * 1024 * 1024)
+            measure_unit = "TiB"
 
         elif number > 1_000_000_000:
-            divider = 1_000_000_000
-            measure_unit = "Go"
+            multiplier = 8 / (8 * 1024 * 1024 * 1024)
+            measure_unit = "GiB"
 
         elif number > 1_000_000:
-            divider = 1_000_000
-            measure_unit = f"Mo"
+            multiplier = 8 / (8 * 1024 * 1024)
+            measure_unit = "MiB"
 
         elif number > 1_000:
-            divider = 1_000
-            measure_unit = f"Ko"
+            multiplier = 8 / (8 * 1024)
+            measure_unit = "MiB"
 
         else:
-            divider = 1
-            measure_unit = f"b"
+            multiplier = 1
+            measure_unit = f"B"
 
         if rounded:
-            tmp_number = int(round(number / divider))
+            tmp_number = int(round(number * multiplier))
             converted = f"{tmp_number}{measure_unit}"
 
         else:
-            tmp_number = round(number / divider, 2)
+            tmp_number = round(number * multiplier, 2)
             converted = f"{tmp_number}{measure_unit}"
 
         return converted
