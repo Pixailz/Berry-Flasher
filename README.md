@@ -11,13 +11,12 @@ python3 berry-flasher
 
 ## TO REWRITE
 
-Nothing
-
-## TO DO
-berry-flasher.menu()
-
+BerryFlasher.print_menu()
 - make menu for selecting image to flash
   - download system image from link
+
+## TO DO
+LinUtils.return_terminal_width()
 
 ### NOTA BENE
 VSCode Shortcuts from [here](https://www.codegrepper.com/code-examples/css/collapse+all+functions+visual+studio+code)
