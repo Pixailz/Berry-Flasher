@@ -588,7 +588,9 @@ class BerryFlasher():
 
     def menu(self):
         self.menu_options = [
+            "List OS",
             "Flash Disk",
+            "Update/Install Balena-CLI",
             "Quit"
         ]
 
@@ -597,7 +599,14 @@ class BerryFlasher():
         while not entry_checked:
             self.utils.clear_screen()
             self.menu_print()
-            entry = input(": ")
+            entry = input(f"(1-{len(self.menu_options)}): ")
+
+            try:
+                int(entry)
+            except ValueError:
+                print("wrong choice")
+                time.sleep(2)
+                continue
 
             for i in range(len(self.menu_options)):
                 j = i + 1
@@ -608,6 +617,12 @@ class BerryFlasher():
             if not entry_checked:
                 print("wrong choice")
                 time.sleep(2)
+
+        if entry == "2":
+            self.select_disk()
+
+        elif entry == "4":
+            exit()
 
     def select_disk(self):
 
