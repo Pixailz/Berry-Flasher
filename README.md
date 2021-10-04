@@ -16,7 +16,39 @@ BerryFlasher.print_menu()
   - download system image from link
 
 ## TO DO
-LinUtils.return_terminal_width()
+
+add colors :'(
+- find cross library or find out in powershell
+- i like term color, soooooooo much
+
+## structure for os link
+
+```python
+[
+    {
+        "name": "os_name",
+        "variant": "full/lite/nightly",
+        "arch": "arm64/armhf",
+        "link": "https://dummy.com/os_image.tar.gz",
+        "upload_date": "yyyy/mm/dd [HH:mm]",
+        "is_present": "true/false"
+    },
+    {
+        "name": "RaspiOS",
+        "variant": "full",
+        "arch": "arm64",
+        "link": "https://downloads.raspberrypi.org/raspios_arm64/images/raspios_arm64-2021-05-28/2021-05-07-raspios-buster-arm64.zip",
+        "upload_date": "2021-05-07 17:18",
+    },
+    {
+        "name": "RaspiOS",
+        "variant": "nighlty",
+        "arch": "armhf",
+        "link": "https://downloads.raspberrypi.org/nightlies/2021-09-15-raspios-buster-nightly-armhf.zip",
+        "upload_date": "2021-09-15 05:44",
+    }
+]
+```
 
 ### NOTA BENE
 VSCode Shortcuts from [here](https://www.codegrepper.com/code-examples/css/collapse+all+functions+visual+studio+code)
