@@ -537,7 +537,7 @@ class LinUtils():
             pass
 
     def clear_screen(self):
-        self.do_command("clear")
+        self.do_command("clear", print_out="True")
 
     def return_terminal_width(self):
         pass
