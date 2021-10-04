@@ -582,9 +582,11 @@ class BerryFlasher():
     def menu_print(self):
 
         self.menu_print_title("MAIN MENU")
+        print("")
 
         for i in range(len(self.menu_options)):
-            print(f"{i+1}. {self.menu_options[i]}".center(self.center_title))
+            print(f"    {i+1}. {self.menu_options[i]}")
+        print("")
 
     def menu(self):
         self.menu_options = [
