@@ -540,7 +540,11 @@ class LinUtils():
         self.do_command("clear", print_out="True")
 
     def return_terminal_width(self):
-        pass
+        size = self.do_command("stty size").split()
+        height = size[0]
+        width = size[1]
+
+        return int(width)
 #=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#=#
 
 class BerryFlasher():
