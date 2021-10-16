@@ -53,7 +53,7 @@ class CrossUtils():
 
         elif number > 1_000_000:
             multiplier = 8 / (8 * 1024 * 1024)
-            measure_unit = "MiB"
+            measure_unit = "KiB"
 
         elif number > 1_000:
             multiplier = 8 / (8 * 1024)
